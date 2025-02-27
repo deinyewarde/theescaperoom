@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Player
-from .serialers import PlayerSerializer
+from .serializers import PlayerSerializer
 from django.contrib.auth.models import User
 
 class PlayerViewSet(viewsets.ModelViewSet):
