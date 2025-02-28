@@ -34,3 +34,14 @@ class LoginView(APIView):
             token, created = Token.objects.get_or_create(user=user)  # Get or create token
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+class LogoutView(APIView):
+    permission_classes = [permissions.IsAuthenticated]  # User must be logged in
+
+    def post(self, request):
+        try:
+            # Delete the user's token to log them out
+            request.user.auth_token.delete()
+            return Response({"message": "Successfully logged out"}, status=status.HTTP_200_OK)
+        except Exception:
+            return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import PlayerViewSet, SignupView, LoginView
+from .views import PlayerViewSet, SignupView, LoginView, LogoutView
 
 # Create a router and register the PlayerViewSet
 router = DefaultRouter()
@@ -10,4 +10,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('signup/', SignupView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),  
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
