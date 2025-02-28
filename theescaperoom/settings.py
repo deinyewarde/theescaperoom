@@ -131,4 +131,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',  
         'rest_framework.renderers.BrowsableAPIRenderer',  # This enables the browsable API
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',  # Token authentication
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Restrict access by default
+    ),
 }
