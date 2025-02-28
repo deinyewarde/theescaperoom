@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status, permissions
 from .models import Player
 from .serializers import PlayerSerializer, SignupSerializer
 from django.contrib.auth.models import User
@@ -14,6 +14,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = PlayerSerializer
 
 class SignupView(APIView):
+    permission_classes = [permissions.AllowAny]
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
@@ -23,6 +24,7 @@ class SignupView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
+    permission_classes = [permissions.AllowAny]
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
